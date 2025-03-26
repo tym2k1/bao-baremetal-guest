@@ -35,20 +35,8 @@ ifneq ($(NO_FIRMWARE),)
 CPPFLAGS+=-DNO_FIRMWARE=y
 endif
 
-ifneq ($(MAKECMDGOALS), clean)
-ifeq ($(GUEST),0)
-CPPFLAGS += -DGUEST0
-$(NAME):=baremetal_guest0
-else ifeq ($(GUEST),1)
-CPPFLAGS += -DGUEST1
-$(NAME):=baremetal_guest1
-else
-$(error GUEST must be set to either 0 or 1)
-endif
-endif
-
-ASFLAGS += $(GENERIC_FLAGS) $(CPPFLAGS) $(ARCH_ASFLAGS) 
-CFLAGS += $(GENERIC_FLAGS) $(CPPFLAGS) $(ARCH_CFLAGS) 
+ASFLAGS += $(GENERIC_FLAGS) $(CPPFLAGS) $(ARCH_ASFLAGS)
+CFLAGS += $(GENERIC_FLAGS) $(CPPFLAGS) $(ARCH_CFLAGS)
 LDFLAGS += $(GENERIC_FLAGS) $(ARCH_LDFLAGS) -nostartfiles
 
 target:=$(BUILD_DIR)/$(NAME)

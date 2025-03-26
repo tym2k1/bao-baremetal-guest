@@ -16,13 +16,8 @@
 #include <timer.h>
 #include <string.h>
 
-#if GUEST0
 #define VM "VM0"
 #define IPC_IRQ_ID 78
-#elif GUEST1
-#define VM "VM1"
-#define IPC_IRQ_ID 79
-#endif
 
 #define TIMER_INTERVAL      (TIME_MS(50))
 
@@ -60,14 +55,8 @@ void ipc_notify(int ipc_id, int event_id)
 void ipc_irq_handler(void)
 {
     static uint32_t counter = 0;
-    if(DEFINED(GUEST0)) {
-        sprintf(message1, "Counter: %d\r\n",++counter);
-        ipc_notify(0, 0);
-    }
-    if(DEFINED(GUEST1)) {
-        print_message(message1);
-
-    }
+    sprintf(message1, "Counter: %d\r\n",++counter);
+    ipc_notify(0, 0);
 }
 
 void uart_rx_handler(void)
@@ -79,9 +68,6 @@ void uart_rx_handler(void)
 void timer_handler(void)
 {
     printf(VM": Timer Handler\n");
-    if(DEFINED(GUEST1)){
-        ipc_notify(0,0);
-    }
 }
 
 void ipc_init(void)
