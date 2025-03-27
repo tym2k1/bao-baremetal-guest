@@ -84,6 +84,8 @@ void main(void)
 
     ipc_init();
 
+    puf_init();
+
     irq_set_handler(UART_IRQ_ID, uart_rx_handler);
     irq_set_handler(TIMER_IRQ_ID, timer_handler);
 

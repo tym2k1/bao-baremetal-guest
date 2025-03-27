@@ -50,7 +50,7 @@ $(target).bin: $(target).elf
 	$(objcopy) -O binary $< $@
 
 $(target).elf: $(objs) $(gen_ld_file)
-	$(cc) $(LDFLAGS) -T$(gen_ld_file) $(objs) -o $@
+	$(cc) $(LDFLAGS) $(CFLAGS) -T$(gen_ld_file) $(objs) -o $@
 	$(objdump) -S $@ > $(target).asm
 	$(objdump) -x -d --wide $@ > $(target).lst
 
