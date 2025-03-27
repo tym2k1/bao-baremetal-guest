@@ -44,6 +44,7 @@ ASM_SRC+=$(addprefix $(platform_dir)/, $(plat_s_srcs))
 SRC_DIRS+= $(foreach driver, $(drivers), $(drivers_dir)/$(driver))
 INC_DIRS+= $(foreach driver, $(drivers), $(drivers_dir)/$(driver)/inc)
 -include $(foreach driver, $(drivers), $(drivers_dir)/$(driver)/sources.mk)
+INC_DIRS += $(driver_inc_dirs)
 C_SRC+=$(addprefix $(drivers_dir)/, $(driver_c_srcs))
 ASM_SRC+=$(addprefix $(drivers_dir)/, $(driver_s_srcs))
 

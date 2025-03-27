@@ -1,5 +1,6 @@
 #include <plat.h>
 #include <lpc_uart.h>
+#include <lpc_puf.h>
 #include <nvic.h>
 #include <sysregs.h>
 
@@ -31,4 +32,9 @@ void uart_enable_rxirq()
 void uart_clear_rxirq()
 {
     lpc_uart_clear_rxirq(uart);
+}
+
+void puf_init(void)
+{
+    lpc_puf_init();
 }
